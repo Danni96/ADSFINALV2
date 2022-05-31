@@ -1,0 +1,94 @@
+﻿@model IEnumerable<ADSProject.Models.EstudianteViewModel>
+@using ADSProject.Utils
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Estudiantes</h3>
+            </div>
+            <div class="col-sm-6">
+                <a class="btn btn-success d-block" asp-action="Form"
+                   asp-route-operaciones="@Operaciones.agregar">Agregar Estudiante</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.idEstudiante)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.nombresEstudiante)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.apellidosEstudiante)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.codigoEstudiante)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.correoEstudiante)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.idCarrera)
+                        </th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.idEstudiante)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombresEstudiante)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.apellidosEstudiante)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.codigoEstudiante)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.correoEstudiante)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Carreras.NombreCarrera)
+                        </td>
+                        <td>
+                            <a class="btn btn-primary"
+                               asp-route-idEstudiante="@item.idEstudiante"
+                               asp-action="Form"
+                               asp-route-operaciones="@Operaciones.modificar">Modificar</a>
+                            <a class="btn btn-warning"
+                               asp-route-idEstudiante="@item.idEstudiante"
+                               asp-action="Form"
+                               asp-route-operaciones="@Operaciones.leer">Leer</a>
+                            <a class="btn btn-danger eliminar"
+                               asp-route-idEstudiante="@item.idEstudiante"
+                               asp-action="Delete">Eliminar</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <h3 class="text-center">Lista vacia.</h3>
+        }
+    </div>
+</div>
+
